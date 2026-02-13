@@ -1,9 +1,0 @@
-
-        body { font-family: sans-serif; padding: 2em; }
-        .form-container { display: flex; flex-direction: column; gap: 10px; max-width: 300px; margin-bottom: 20px; }
-        input { padding: 8px; }
-        button { padding: 10px; cursor: pointer; }
-        #productosAñadidos p { border-bottom: 1px solid #ccc; padding-bottom: 5px; }
-.btnConfirmar{
-        background-color: rgb(52, 255, 11);
-}
