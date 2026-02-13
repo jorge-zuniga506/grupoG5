@@ -1,0 +1,36 @@
+Pasos:
+Abrir terminal ctrl j
+
+1. npm init -y -> Crea el package.json (lo que tiene todas las dependecias e informacion del proyecto)
+
+
+2. Crear carpeta public -> pages y js
+
+3. Crear el server.js -> Cargar las rutas (recursos) del proyecto. Para tener el HTML.
+Afuera de public
+
+4. Dentro de package.json. Abajo de test y dentro de scripts, escribir:
+    "start": "node server.js",
+    "dev": "nodemon server.js"
+Estas dos líneas le indican al servidor como comportarse, con que comando ejecturtarse y que archivo ejecutar
+
+5. Probar :p
+npm start
+
+
+-----------------------------
+Instalaciones
+
+ npm i -D nodemon -> *-D significa que es una dependencia de desarrollo*
+Desarrollo significa que cuando la aplicación este en producción simplemente no existe esa dependencia
+
+nodemon hace que al cerrar la consola y volver abrirla NO tener que recargar para tener que ver los cambios
+
+ npm i express -> Servidor
+
+servidor que conecta los recursos de la pagina
+
+
+Cuando la consola se bloquea tocamos
+
+ctrl c
