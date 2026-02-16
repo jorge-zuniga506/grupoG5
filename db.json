@@ -1,11 +1,18 @@
 {
-    "usuarios": [
-        {
-            "id": 1,
-            "nombre": "Admin",
-            "email": "[EMAIL_ADDRESS]",
-            "password": "[PASSWORD]",
-            "rol": "admin"
-        }
-    ]
+  "usuarios": [
+    {
+      "id": 1,
+      "nombre": "Admin",
+      "email": "correo@gmail.com",
+      "password": "1234",
+      "rol": "admin"
+    },
+    {
+      "id": "2e79",
+      "nombre": "Ronny Salas ",
+      "email": "Rsalaspost@gmail.com",
+      "telefono": "1111111",
+      "password": "12345"
+    }
+  ]
 }

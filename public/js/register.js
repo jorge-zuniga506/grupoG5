@@ -1,33 +1,21 @@
+import { postUsuarios } from "../services/serviciosUsuario.js";
 
-document.getElementById('registerForm').addEventListener('submit', async (e) => {
+const nombre = document.getElementById('nombre')
+const email = document.getElementById('email')
+const telefono = document.getElementById('telefono')
+const password = document.getElementById('password')
+const btnRegistrarse = document.getElementById('btnRegistrarse')
+
+
+async function registrarUsuario(e) {
     e.preventDefault();
-
-    const formData = new FormData(e.target);
-    const data = Object.fromEntries(formData.entries());
-
-    console.log('Enviando datos de registro:', data);
-
-    try {
-        const response = await fetch('/api/ciudadanos', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(data)
-        });
-
-        console.log('Respuesta del servidor (status):', response.status);
-
-        if (response.ok) {
-            const result = await response.json();
-            console.log('--- REGISTRO EXITOSO ---', result);
-            alert('¡Usuario registrado exitosamente!');
-            window.location.href = '/pages/login.html';
-        } else {
-            const errorText = await response.text();
-            console.error('Error en registro:', response.status, errorText);
-            alert(`Error al registrar usuario: ${response.status}`);
-        }
-    } catch (error) {
-        console.error('Error de red/conexión:', error);
-        alert('No se pudo conectar con el servidor. ¿Está encendido?');
+    const objUsuario = {
+        nombre: nombre.value,
+        email: email.value,
+        telefono: telefono.value,
+        password: password.value
     }
-});
+    await postUsuarios(objUsuario)
+}
+
+btnRegistrarse.addEventListener('click', registrarUsuario)

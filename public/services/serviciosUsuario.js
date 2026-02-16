@@ -1,58 +1,19 @@
 async function getUsuarios() {
-    try {
-        const response = await fetch('http://localhost:3000/usuarios');
-        const data = await response.json();
-        return data;
-    } catch (error) {
-        console.log("Error al obtener usuarios", error);
-    }
+    const peticion = await fetch('http://localhost:3001/usuarios');
+    const datos = await peticion.json();
+    return datos;
 }
 
-async function postUsuario(usuario) {
-    try {
-        const response = await fetch('http://localhost:3000/usuarios', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(usuario),
-        });
-        const data = await response.json();
-        return data;
-    } catch (error) {
-        console.log("Error al obtener usuarios", error);
-    }
+async function postUsuarios(data) {
+    const peticion = await fetch('http://localhost:3001/usuarios', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+    })
+    const datos = await peticion.json();
+    return datos;
 }
 
-async function putUsuario(usuario) {
-    try {
-        const response = await fetch('http://localhost:3000/usuarios', {
-            method: 'PUT',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(usuario),
-        });
-        const data = await response.json();
-        return data;
-    } catch (error) {
-        console.log("Error al obtener usuarios", error);
-    }
-}
-
-async function deleteUsuario(usuario) {
-    try {
-        const response = await fetch('http://localhost:3000/usuarios', {
-            method: 'DELETE',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(usuario),
-        });
-        const data = await response.json();
-        return data;
-    } catch (error) {
-        console.log("Error al obtener usuarios", error);
-    }
-}
-export { getUsuarios, postUsuario, putUsuario, deleteUsuario }
+export { getUsuarios, postUsuarios };

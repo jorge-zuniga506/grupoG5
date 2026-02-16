@@ -1,8 +1,14 @@
+import { getUsuarios } from "../services/serviciosUsuario.js";
+
 const btnCitizen = document.getElementById('btnCitizen');
 const btnAdmin = document.getElementById('btnAdmin');
 const roleInput = document.getElementById('role');
 const adminCodeGroup = document.getElementById('adminCodeGroup');
 const adminCodeInput = document.getElementById('adminCode');
+const emailInput = document.getElementById('email');
+const passwordInput = document.getElementById('password');
+const btnIniciarSesion = document.getElementById('btnIniciarSesion');
+
 
 const switchRole = (role) => {
     roleInput.value = role;
@@ -22,51 +28,18 @@ const switchRole = (role) => {
 btnCitizen.addEventListener('click', () => switchRole('citizen'));
 btnAdmin.addEventListener('click', () => switchRole('admin'));
 
-document.getElementById('loginForm').addEventListener('submit', async (e) => {
+
+async function inicioUsuario(e) {
     e.preventDefault();
+    const usuarios = await getUsuarios();
 
-    const formData = new FormData(e.target);
-    const data = Object.fromEntries(formData.entries());
-    const role = document.getElementById('role').value;
+    const usuarioValido = usuarios.find((usuario) => usuario.email === emailInput.value && usuario.password === passwordInput.value);
 
-    data.role = role;
-
-    try {
-        const response = await fetch('/api/login', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(data)
-        });
-
-        const result = await response.json();
-
-        if (response.ok) {
-            console.log('--- LOGIN EXITOSO ---');
-            console.log('Usuario:', result.user);
-            console.log('Rol:', result.role);
-            console.log('Guardando datos en localStorage...');
-
-            // Store user info
-            localStorage.setItem('user', JSON.stringify(result.user));
-            localStorage.setItem('role', result.role);
-            localStorage.setItem('loginTime', new Date().toISOString());
-
-            alert('Login exitoso');
-
-            if (role === 'admin') {
-                window.location.href = '/pages/home.html';
-            } else {
-                window.location.href = '/pages/home.html';
-            }
-        } else {
-            console.error('Error de autenticación:', result.message);
-            alert(result.message || 'Error en el inicio de sesión');
-        }
-
-    } catch (error) {
-        console.error('Error:', error);
-        alert('Error de conexión');
+    if (usuarioValido) {
+        alert("Inicio de sesión exitoso")
+    } else {
+        alert("Usuario o contraseña incorrectos")
     }
-});
+}
+
+btnIniciarSesion.addEventListener('click', inicioUsuario);
