@@ -16,8 +16,4 @@ document.addEventListener('DOMContentLoaded', () => {
             slides[currentSlide].classList.add('active');
         }, slideInterval);
     }
-<<<<<<< HEAD
 });
-=======
-});
->>>>>>> ronny
