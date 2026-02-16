@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../styles/cuidadano.css">
+</head>
+<div class="container">
+    <header>
+        <h1>📢 Buzón de Quejas y Reclamos</h1>
+        <p>Tu voz es importante para mejorar nuestra comunidad.</p>
+    </header>
+
+    <section class="complaint-form-section">
+        <h2>Nueva Queja o Reclamo</h2>
+        <form id="complaintForm">
+            <div class="form-group">
+                <label for="title">Título:</label>
+                <input type="text" id="title" required placeholder="Ej: Bache en la calle principal">
+            </div>
+            <div class="form-group">
+                <label for="category">Categoría:</label>
+                <select id="category" required>
+                    <option value="vial">Vial (Infraestructura)</option>
+                    <option value="servicio">Servicio Público (Limpieza/Agua)</option>
+                    <option value="seguridad">Seguridad</option>
+                    <option value="otros">Otros</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="location">Ubicación:</label>
+                <input type="text" id="location" required placeholder="Ej: Av. Central, frente al parque">
+            </div>
+            <div class="form-group">
+                <label for="description">Descripción:</label>
+                <textarea id="description" rows="4" required
+                    placeholder="Describe el problema con detalle..."></textarea>
+            </div>
+            <button type="submit" class="btn-submit">Enviar Reporte</button>
+        </form>
+    </section>
+
+    <section class="complaints-list-section">
+        <h2>Mis Reportes</h2>
+        <div class="status-legend">
+            <span class="status-dot red"></span> Recibido
+            <span class="status-dot yellow"></span> En Proceso
+            <span class="status-dot green"></span> Resuelto
+        </div>
+        <div id="complaintsList" class="complaints-grid">
+            <!-- Complaints will be added here dynamically -->
+        </div>
+    </section>
+</div>
+<script type="module" src="../js/cuidadano.js"></script>
+</body>
+
+</html>
