@@ -1,49 +1,86 @@
+.auth-section {
+    background-color: var(--bg-light);
+    padding: 6rem 0;
+}
+
+.auth-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .auth-card {
-    background: var(--card-bg);
-    backdrop-filter: blur(12px);
-    border: 1px solid var(--border);
-    padding: 2.5rem;
-    border-radius: 1.5rem;
+    background: #fff;
+    padding: 3rem;
+    border-radius: 15px;
     width: 100%;
-    max-width: 450px;
-    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
-    animation: fadeIn 0.6s ease-out;
+    max-width: 500px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    border-top: 6px solid var(--escazu-blue);
+    margin-top: 2rem;
+}
+
+.auth-card h2 {
+    text-align: center;
+    margin-bottom: 0.5rem;
+    color: var(--escazu-blue);
+}
+
+.auth-card h2::after {
+    content: '';
+    display: block;
+    width: 60px;
+    height: 4px;
+    background-color: var(--escazu-gold);
+    margin: 0.5rem auto 1rem;
+}
+
+.auth-card p {
+    text-align: center;
+    color: #666;
+    margin-bottom: 2rem;
 }
 
 .form-group {
     margin-bottom: 1.5rem;
 }
 
-label {
+.form-group label {
     display: block;
     margin-bottom: 0.5rem;
-    color: var(--text-muted);
-    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--escazu-blue);
 }
 
-input {
+.form-group input {
     width: 100%;
-    padding: 0.75rem 1rem;
-    background: var(--glass);
-    border: 1px solid var(--border);
-    border-radius: 0.75rem;
-    color: white;
+    padding: 0.8rem 1rem;
+    border: 1px solid #ddd;
+    border-radius: 5px;
     font-size: 1rem;
-    transition: all 0.3s ease;
+    transition: border-color 0.3s ease;
+    background-color: #fff;
+    color: var(--text-dark);
 }
 
-input:focus {
+.form-group input:focus {
     outline: none;
-    border-color: var(--primary);
-    box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.2);
-    background: rgba(255, 255, 255, 0.05);
+    border-color: var(--escazu-gold);
 }
 
 .footer-text {
     margin-top: 2rem;
-    font-size: 0.875rem;
+    text-align: center;
+    font-size: 0.95rem;
+    color: #555;
 }
 
-.register-container {
-    border-color: rgba(99, 102, 241, 0.3);
+.footer-text a {
+    color: var(--escazu-gold);
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.footer-text a:hover {
+    text-decoration: underline;
 }
