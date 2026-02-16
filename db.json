@@ -1,18 +1,11 @@
 {
-  "productos": [
-    {
-      "id": "6057",
-      "nombre": "macarrones",
-      "precio": 200,
-      "categoria": "granos",
-      "stock": 20
-    },
-    {
-      "id": "62d5",
-      "nombre": "Frijoles",
-      "precio": 111,
-      "categoria": "bbb",
-      "stock": 222
-    }
-  ]
+    "usuarios": [
+        {
+            "id": 1,
+            "nombre": "Admin",
+            "email": "[EMAIL_ADDRESS]",
+            "password": "[PASSWORD]",
+            "rol": "admin"
+        }
+    ]
 }
