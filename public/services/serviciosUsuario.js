@@ -55,3 +55,4 @@ async function deleteUsuario(usuario) {
         console.log("Error al obtener usuarios", error);
     }
 }
+export { getUsuarios, postUsuario, putUsuario, deleteUsuario }
