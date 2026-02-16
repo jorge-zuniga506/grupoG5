@@ -26,7 +26,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Try to send to backend (POST)
         try {
-            const response = await fetch('http://localhost:3000/reportes', {
+            const response = await fetch('http://localhost:3001/servicios', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'

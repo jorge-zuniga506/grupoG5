@@ -14,5 +14,16 @@
       "telefono": "1111111",
       "password": "12345"
     }
+  ],
+  "servicios": [
+    {
+      "id": 1771277954432,
+      "title": "A",
+      "category": "seguridad",
+      "description": "ddddd",
+      "location": "weww",
+      "date": "16/2/2026",
+      "status": "recibido"
+    }
   ]
 }

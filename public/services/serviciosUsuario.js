@@ -16,4 +16,11 @@ async function postUsuarios(data) {
     return datos;
 }
 
-export { getUsuarios, postUsuarios };
+async function deleteUsuarios(id) {
+    const peticion = await fetch('http://localhost:3001/usuarios', {
+        method: 'Delete',
+    })
+    const datos = await peticion.json();
+    return datos;
+}
+export { getUsuarios, postUsuarios, deleteUsuarios };
