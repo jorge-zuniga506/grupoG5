@@ -4,33 +4,255 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home - Grupo G5</title>
-    <link rel="stylesheet" href="../styles/main.css">
+    <title>Document</title>
     <link rel="stylesheet" href="../styles/home.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 
 <body>
     <nav class="navbar">
-        <div class="navbar-logo">Grupo G5</div>
-        <ul class="navbar-menu">
-            <li><a href="/" class="navbar-link">Inicio</a></li>
-            <li><a href="/pages/login.html" class="navbar-link">Login</a></li>
-            <li><a href="/pages/register.html" class="navbar-link">Registro</a></li>
-        </ul>
+        <div class="navbar-container">
+            <a href="home.html" class="navbar-logo">Grupo G5</a>
+            <ul class="navbar-menu">
+                <li class="navbar-item"><a href="home.html" class="navbar-link">Inicio</a></li>
+                <li class="navbar-item"><a href="login.html" class="navbar-link">Iniciar Sesión</a></li>
+                <li class="navbar-item"><a href="register.html" class="navbar-link">Registrarse</a></li>
+                <li class="navbar-item"><a href="admin-dashboard.html" class="navbar-link">Panel Admin</a></li>
+            </ul>
+        </div>
     </nav>
 
-    <div class="hero-container">
-        <h1 class="hero-title">Gestión Ciudadana</h1>
-        <p class="hero-subtitle">Una plataforma moderna para conectar ciudadanos y administradores. Transparencia y
-            eficiencia al alcance de tu mano.</p>
-
-        <div class="cta-buttons">
-            <a href="/pages/register.html"><button style="width: auto; padding: 1rem 2rem;">Empezar ahora</button></a>
-            <a href="/pages/login.html"><button class="btn-secondary" style="width: auto; padding: 1rem 2rem;">Ya tengo
-                    cuenta</button></a>
+    <header class="hero">
+        <div class="hero-carousel">
+            <div class="carousel-slide active"
+                style="background-image: url('https://images.unsplash.com/photo-1598555836248-cb75949a2020?q=80&w=2670&auto=format&fit=crop');">
+            </div>
+            <div class="carousel-slide"
+                style="background-image: url('https://images.unsplash.com/photo-1517457373958-b7bdd4587205?q=80&w=2669&auto=format&fit=crop');">
+            </div>
+            <div class="carousel-slide"
+                style="background-image: url('https://images.unsplash.com/photo-1480714378408-67cf0d13bc1b?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80');">
+            </div>
         </div>
-    </div>
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <h1>Mejorando nuestro cantón juntos</h1>
+            <p>Sistema de Gestión Vial de la Municipalidad de Escazú. Reporte averías y contribuya al desarrollo de
+                nuestra comunidad.</p>
+            <div class="hero-buttons">
+                <a href="login.html" class="btn btn-primary">Iniciar Sesión</a>
+                <a href="register.html" class="btn btn-secondary">Registrarse como Ciudadano</a>
+            </div>
+        </div>
+    </header>
 
+    <section class="info-section">
+        <div class="container">
+            <h2>¿Cómo funciona?</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3>1. Reporta el problema</h3>
+                    <p>Identifique baches, aceras dañadas o problemas de señalización y repórtelos fácilmente desde
+                        nuestra plataforma.</p>
+                </div>
+                <div class="info-card">
+                    <h3>2. La Municipalidad procesa</h3>
+                    <p>Nuestro equipo técnico evalúa su reporte, asigna recursos y planifica la intervención necesaria.
+                    </p>
+                </div>
+                <div class="info-card">
+                    <h3>3. Solución ejecutada</h3>
+                    <p>Las cuadrillas realizan la reparación y usted recibe una notificación cuando el problema ha sido
+                        resuelto.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="municipal-categories">
+        <div class="container">
+            <div class="category-row">
+                <div class="category-main-icon">
+                    <div class="icon-circle">
+                        <i class="fas fa-landmark"></i>
+                    </div>
+                    <h3>La Municipalidad</h3>
+                </div>
+                <div class="category-cards">
+                    <a href="#" class="cat-card">
+                        <i class="fas fa-info-circle"></i>
+                        <span>Conozcanos</span>
+                    </a>
+                    <a href="#" class="cat-card">
+                        <i class="fas fa-user-tie"></i>
+                        <span>Alcaldía</span>
+                    </a>
+                    <a href="#" class="cat-card">
+                        <i class="fas fa-users"></i>
+                        <span>Concejo</span>
+                    </a>
+                    <a href="#" class="cat-card">
+                        <i class="fas fa-file-contract"></i>
+                        <span>Denuncias Auditoría</span>
+                    </a>
+                    <a href="#" class="cat-card">
+                        <i class="fas fa-laptop-house"></i>
+                        <span>Consulta Muni Virtual</span>
+                    </a>
+                </div>
+            </div>
+
+            <div class="category-row">
+                <div class="category-main-icon">
+                    <div class="icon-circle">
+                        <i class="fas fa-map-marked-alt"></i>
+                    </div>
+                    <h3>El Cantón</h3>
+                </div>
+                <div class="category-cards">
+                    <a href="#" class="cat-card">
+                        <i class="fas fa-flag"></i>
+                        <span>Símbolos</span>
+                    </a>
+                    <a href="#" class="cat-card">
+                        <i class="fas fa-scroll"></i>
+                        <span>Historia</span>
+                    </a>
+                    <a href="#" class="cat-card">
+                        <i class="fas fa-award"></i>
+                        <span>Hijos Predilectos</span>
+                    </a>
+                    <a href="#" class="cat-card">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>Distritos</span>
+                    </a>
+                    <a href="#" class="cat-card">
+                        <i class="fas fa-chart-bar"></i>
+                        <span>Datos Generales</span>
+                    </a>
+                </div>
+            </div>
+
+            <div class="category-row">
+                <div class="category-main-icon">
+                    <div class="icon-circle">
+                        <i class="fas fa-palette"></i>
+                    </div>
+                    <h3>Cultura y Arte</h3>
+                </div>
+                <div class="category-cards">
+                    <a href="#" class="cat-card">
+                        <i class="fas fa-list-alt"></i>
+                        <span>Cursos</span>
+                    </a>
+                    <a href="#" class="cat-card">
+                        <i class="fas fa-venus"></i>
+                        <span>Mujeres Escazueñas</span>
+                    </a>
+                    <a href="#" class="cat-card">
+                        <i class="fas fa-building"></i>
+                        <span>Instalaciones Culturales</span>
+                    </a>
+                    <a href="#" class="cat-card">
+                        <i class="fas fa-images"></i>
+                        <span>Galerías</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="municipal-news">
+        <div class="container">
+            <h2 class="section-title-left">Actualidad Municipal</h2>
+            <div class="news-grid">
+                <!-- Card 1 -->
+                <div class="news-card">
+                    <div class="news-tag">#Sociales</div>
+                    <div class="news-image">
+                        <img src="https://images.unsplash.com/photo-1544027993-37dbfe43562a?q=80&w=600&auto=format&fit=crop"
+                            alt="Sociales">
+                    </div>
+                    <div class="news-content">
+                        <h3>LAS PALOMAS DEL PARQUE CENTENARIO</h3>
+                        <p class="news-excerpt">"Más de 25 años de tertulias en el parque". Hablar de Las Palomas del
+                            Parque es hablar de tradición y amistad.</p>
+                        <a href="#" class="btn btn-primary btn-sm">Ver más</a>
+                    </div>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="news-card">
+                    <div class="news-tag">#Seguridad</div>
+                    <div class="news-image">
+                        <img src="https://images.unsplash.com/photo-1555963249-111dcbf5304b?q=80&w=600&auto=format&fit=crop"
+                            alt="Seguridad">
+                    </div>
+                    <div class="news-content">
+                        <h3>Alerta sobre posible estafa con falso proyecto de vivienda</h3>
+                        <p class="news-excerpt">La Municipalidad advierte a la población sobre personas inescrupulosas
+                            ofreciendo trámites falsos.</p>
+                        <a href="#" class="btn btn-primary btn-sm">Ver más</a>
+                    </div>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="news-card">
+                    <div class="news-tag">#Ambiente</div>
+                    <div class="news-image">
+                        <img src="https://images.unsplash.com/photo-1532996122724-e3c354a0b15b?q=80&w=600&auto=format&fit=crop"
+                            alt="Ambiente">
+                    </div>
+                    <div class="news-content">
+                        <h3>Alianza Intermunicipal permitirá recuperación de residuos</h3>
+                        <p class="news-excerpt">La situación crítica de la gestión de residuos sólidos llevó a los
+                            municipios a unir fuerzas por el ambiente.</p>
+                        <a href="#" class="btn btn-primary btn-sm">Ver más</a>
+                    </div>
+                </div>
+
+                <!-- Card 4 -->
+                <div class="news-card">
+                    <div class="news-tag">#Seguridad</div>
+                    <div class="news-image">
+                        <img src="https://images.unsplash.com/photo-1551884831-bbf3ddd78d56?q=80&w=600&auto=format&fit=crop"
+                            alt="Policía Municipal">
+                    </div>
+                    <div class="news-content">
+                        <h3>Policía Municipal despide a Lobo y Molly</h3>
+                        <p class="news-excerpt">Lobo y Molly se retiran tras años de servicio en operativos de
+                            seguridad; la Unidad K9 agradece su labor.</p>
+                        <a href="#" class="btn btn-primary btn-sm">Ver más</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container footer-content">
+            <div class="footer-section">
+                <h3>Municipalidad de Escazú</h3>
+                <p>Comprometidos con el bienestar de nuestros ciudadanos.</p>
+            </div>
+            <div class="footer-section">
+                <h3>Contacto</h3>
+                <p>Teléfono: 2208-7500</p>
+                <p>Email: gestionvial@escazu.go.cr</p>
+                <p>Dirección: Escazú, San José, Costa Rica</p>
+            </div>
+            <div class="footer-section">
+                <h3>Enlaces Rápidos</h3>
+                <ul>
+                    <li><a href="login.html">Iniciar Sesión</a></li>
+                    <li><a href="register.html">Registrarse</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Municipalidad de Escazú. Todos los derechos reservados.</p>
+        </div>
+    </footer>
     <script type="module" src="../js/home.js"></script>
 </body>
 
