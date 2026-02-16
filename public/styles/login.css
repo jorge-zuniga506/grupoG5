@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 .auth-card {
     background: var(--card-bg);
     backdrop-filter: blur(12px);
@@ -8,12 +9,57 @@
     max-width: 450px;
     box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
     animation: fadeIn 0.6s ease-out;
+=======
+.auth-section {
+    background-color: var(--bg-light);
+    padding: 6rem 0;
+}
+
+.auth-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.auth-card {
+    background: #fff;
+    padding: 3rem;
+    border-radius: 15px;
+    width: 100%;
+    max-width: 500px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    border-top: 6px solid var(--escazu-blue);
+    margin-top: 2rem;
+}
+
+.auth-card h2 {
+    text-align: center;
+    margin-bottom: 0.5rem;
+    color: var(--escazu-blue);
+}
+
+/* Redefine h2 after line if needed, but home.css already has it for sections */
+.auth-card h2::after {
+    content: '';
+    display: block;
+    width: 60px;
+    height: 4px;
+    background-color: var(--escazu-gold);
+    margin: 0.5rem auto 1rem;
+}
+
+.auth-card p {
+    text-align: center;
+    color: #666;
+    margin-bottom: 2rem;
+>>>>>>> ronny
 }
 
 .form-group {
     margin-bottom: 1.5rem;
 }
 
+<<<<<<< HEAD
 label {
     display: block;
     margin-bottom: 0.5rem;
@@ -42,6 +88,29 @@ input:focus {
 .footer-text {
     margin-top: 2rem;
     font-size: 0.875rem;
+=======
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+    color: var(--escazu-blue);
+}
+
+.form-group input {
+    width: 100%;
+    padding: 0.8rem 1rem;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1rem;
+    transition: border-color 0.3s ease;
+    background-color: #fff;
+    color: var(--text-dark);
+}
+
+.form-group input:focus {
+    outline: none;
+    border-color: var(--escazu-gold);
+>>>>>>> ronny
 }
 
 .role-selector {
@@ -51,6 +120,7 @@ input:focus {
 }
 
 .role-selector button {
+<<<<<<< HEAD
     margin-top: 0;
     background: var(--glass);
     border: 1px solid var(--border);
@@ -61,4 +131,40 @@ input:focus {
     background: var(--primary);
     color: white;
     border-color: var(--primary);
+=======
+    flex: 1;
+    padding: 0.7rem;
+    background-color: #eee;
+    color: #666;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    margin-top: 0;
+    width: auto;
+    /* Reset global button width if necessary */
+}
+
+.role-selector button.active {
+    background-color: var(--escazu-blue);
+    color: #fff;
+}
+
+.footer-text {
+    margin-top: 2rem;
+    text-align: center;
+    font-size: 0.95rem;
+    color: #555;
+}
+
+.footer-text a {
+    color: var(--escazu-gold);
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.footer-text a:hover {
+    text-decoration: underline;
+>>>>>>> ronny
 }

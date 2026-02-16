@@ -7,5 +7,45 @@
             "password": "[PASSWORD]",
             "rol": "admin"
         }
-    ]
+    ],
+    "ciudadanos": [
+        {
+            "id": 999,
+            "nombre": "Test Manual",
+            "email": "test@man.com"
+        },
+        {
+            "id": 1771255713773,
+            "nombre": "AutoTest",
+            "email": "auto@test.com"
+        },
+        {
+            "id": 1771257575267,
+            "nombre": "FinalTest",
+            "email": "final@test.com",
+            "password": "123"
+        },
+        {
+            "id": 1771262530407,
+            "nombre": "AutoTest",
+            "email": "auto@test.com"
+        },
+        {
+            "id": 1771262665183,
+            "nombre": "Test",
+            "email": "test1771262665037@test.com",
+            "telefono": "12345678",
+            "password": "123"
+        },
+        {
+            "id": 1771264081906,
+            "nombre": "PersistTest",
+            "email": "persist@test.com",
+            "password": "123",
+            "telefono": "123"
+        }
+    ],
+    "config": {
+        "adminCode": "admin123"
+    }
 }
