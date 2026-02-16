@@ -1,55 +1,30 @@
-/* Basic reset */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+.hero-container {
+    text-align: center;
+    max-width: 800px;
+    padding: 2rem;
 }
 
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
+.hero-title {
+    font-size: 4rem;
+    margin-bottom: 1.5rem;
 }
 
-/* Navbar styles */
-.navbar {
-    background-color: #333;
-    color: #fff;
-    padding: 1rem 0;
+.hero-subtitle {
+    font-size: 1.25rem;
+    margin-bottom: 3rem;
 }
 
-.navbar-container {
+.cta-buttons {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 2rem;
+    gap: 1.5rem;
+    justify-content: center;
 }
 
-.navbar-logo {
-    color: #fff;
-    font-size: 1.5rem;
-    font-weight: bold;
-    text-decoration: none;
+.btn-secondary {
+    background: var(--glass);
+    border: 1px solid var(--border);
 }
 
-.navbar-menu {
-    display: flex;
-    list-style: none;
-}
-
-.navbar-item {
-    margin-left: 1.5rem;
-}
-
-.navbar-link {
-    color: #fff;
-    text-decoration: none;
-    font-size: 1rem;
-    transition: color 0.3s ease;
-}
-
-.navbar-link:hover {
-    color: #f0a500;
-    /* Example hover color */
+.btn-secondary:hover {
+    background: rgba(255, 255, 255, 0.1);
 }

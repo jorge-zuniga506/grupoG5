@@ -4,22 +4,33 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Home - Grupo G5</title>
+    <link rel="stylesheet" href="../styles/main.css">
     <link rel="stylesheet" href="../styles/home.css">
 </head>
 
 <body>
     <nav class="navbar">
-        <div class="navbar-container">
-            <a href="home.html" class="navbar-logo">Grupo G5</a>
-            <ul class="navbar-menu">
-                <li class="navbar-item"><a href="home.html" class="navbar-link">Home</a></li>
-                <li class="navbar-item"><a href="login.html" class="navbar-link">Login</a></li>
-                <li class="navbar-item"><a href="register.html" class="navbar-link">Register</a></li>
-                <li class="navbar-item"><a href="admin-dashboard.html" class="navbar-link">Admin Dashboard</a></li>
-            </ul>
-        </div>
+        <div class="navbar-logo">Grupo G5</div>
+        <ul class="navbar-menu">
+            <li><a href="/" class="navbar-link">Inicio</a></li>
+            <li><a href="/pages/login.html" class="navbar-link">Login</a></li>
+            <li><a href="/pages/register.html" class="navbar-link">Registro</a></li>
+        </ul>
     </nav>
+
+    <div class="hero-container">
+        <h1 class="hero-title">Gestión Ciudadana</h1>
+        <p class="hero-subtitle">Una plataforma moderna para conectar ciudadanos y administradores. Transparencia y
+            eficiencia al alcance de tu mano.</p>
+
+        <div class="cta-buttons">
+            <a href="/pages/register.html"><button style="width: auto; padding: 1rem 2rem;">Empezar ahora</button></a>
+            <a href="/pages/login.html"><button class="btn-secondary" style="width: auto; padding: 1rem 2rem;">Ya tengo
+                    cuenta</button></a>
+        </div>
+    </div>
+
     <script type="module" src="../js/home.js"></script>
 </body>
 
