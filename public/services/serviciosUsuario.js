@@ -4,8 +4,8 @@ async function getUsuarios() {
     return datos;
 }
 
-async function postUsuarios(data) {
-    const peticion = await fetch('http://localhost:3001/usuarios', {
+async function postUsuarios(data, endpoint = 'usuarios') {
+    const peticion = await fetch(`http://localhost:3001/${endpoint}`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -16,9 +16,9 @@ async function postUsuarios(data) {
     return datos;
 }
 
-async function deleteUsuarios(id) {
-    const peticion = await fetch('http://localhost:3001/usuarios', {
-        method: 'Delete',
+async function deleteUsuarios(id, endpoint = 'usuarios') {
+    const peticion = await fetch(`http://localhost:3001/${endpoint}/${id}`, {
+        method: 'DELETE',
     })
     const datos = await peticion.json();
     return datos;
