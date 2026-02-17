@@ -42,4 +42,4 @@ async function inicioUsuario(e) {
     }
 }
 
-btnIniciarSesion.addEventListener('click', inicioUsuario);
+btnIniciarSesion.addEventListener('click', inicioUsuario);  
