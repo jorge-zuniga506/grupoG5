@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="../styles/admin-dashboard.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 
 <body>
@@ -23,6 +24,10 @@
         <main class="main-content">
             <header class="main-header">
                 <h2>Admin Dashboard</h2>
+                <div class="user-info">
+                    <span id="userName">Cargando...</span>
+                    <button id="btnLogout" class="btn-logout">Cerrar Sesión</button>
+                </div>
             </header>
             <div class="content">
                 <!-- Content will be loaded here -->

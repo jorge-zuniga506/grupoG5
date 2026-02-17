@@ -36,9 +36,51 @@ async function inicioUsuario(e) {
     const usuarioValido = usuarios.find((usuario) => usuario.email === emailInput.value && usuario.password === passwordInput.value);
 
     if (usuarioValido) {
-        alert("Inicio de sesión exitoso")
+        // Enforce role check and admin code
+        if (roleInput.value === 'admin') {
+            if (usuarioValido.rol !== 'admin') {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Acceso Denegado',
+                    text: 'No tienes permisos de administrador',
+                    confirmButtonColor: '#1A1A54'
+                });
+                return;
+            }
+            if (adminCodeInput.value !== 'cr7teamo') {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Código Incorrecto',
+                    text: 'El código de administrador es incorrecto',
+                    confirmButtonColor: '#1A1A54'
+                });
+                return;
+            }
+        }
+
+        localStorage.setItem('currentUser', JSON.stringify(usuarioValido));
+
+        Swal.fire({
+            icon: 'success',
+            title: '¡Bienvenido!',
+            text: 'Inicio de sesión exitoso',
+            timer: 2000,
+            showConfirmButton: false
+        }).then(() => {
+            if (usuarioValido.rol === 'admin') {
+                window.location.href = 'admin-dashboard.html';
+            } else {
+                window.location.href = 'cuidadano.html';
+            }
+        });
+
     } else {
-        alert("Usuario o contraseña incorrectos")
+        Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'Usuario o contraseña incorrectos',
+            confirmButtonColor: '#1A1A54'
+        });
     }
 }
 

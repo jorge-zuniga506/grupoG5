@@ -7,7 +7,8 @@ body {
 }
 
 .container {
-    max-width: 800px;
+    max-width: 1200px;
+    /* Expanded for side-by-side layout */
     margin: 0 auto;
     background-color: white;
     padding: 30px;
@@ -15,11 +16,62 @@ body {
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
 }
 
+/* Dashboard Grid Layout */
+.dashboard-layout {
+    display: grid;
+    grid-template-columns: 1fr 400px;
+    /* YouTube-style ratio */
+    gap: 30px;
+}
+
+@media (max-width: 1024px) {
+    .dashboard-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .sidebar-column {
+        order: 2;
+    }
+}
+
+.main-column {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.sidebar-column {
+    border-left: 1px solid #eee;
+    padding-left: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+@media (max-width: 1024px) {
+    .sidebar-column {
+        border-left: none;
+        padding-left: 0;
+        border-top: 1px solid #eee;
+        padding-top: 30px;
+    }
+}
+
+/* Specific Community Grid (stacked in sidebar) */
+.community-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* Existing styles preserved... */
 header {
     text-align: center;
     margin-bottom: 30px;
     color: #2c3e50;
 }
+
+/* ... Rest of the file content ... */
 
 header h1 {
     color: #e67e22;
@@ -154,16 +206,154 @@ textarea:focus {
     transform: translateY(-5px);
 }
 
-.complaint-card.status-recibido {
-    border-top-color: #e74c3c;
+/* Dashboard Grid Layout - Rebalanced for the screenshot look */
+.dashboard-layout {
+    display: grid;
+    grid-template-columns: 450px 1fr;
+    /* Form on left, Feed on right */
+    gap: 30px;
+    align-items: start;
 }
 
-.complaint-card.status-en-proceso {
-    border-top-color: #f1c40f;
+@media (max-width: 1100px) {
+    .dashboard-layout {
+        grid-template-columns: 1fr;
+    }
 }
 
-.complaint-card.status-resuelto {
-    border-top-color: #2ecc71;
+/* Cinematic Form (Left Column) */
+.complaint-form-section {
+    background: #000;
+    color: white;
+    border-radius: 12px;
+    padding: 40px 30px;
+    border: none;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    margin-bottom: 50px;
+    /* Force separation from reports */
+}
+
+.complaint-form-section h1,
+.complaint-form-section h2 {
+    color: #C5911E;
+    text-align: center;
+    font-size: 2rem;
+    margin-bottom: 20px;
+    border-bottom: 3px solid #C5911E;
+    padding-bottom: 10px;
+}
+
+.complaint-form-section .form-group label {
+    color: #fff;
+    font-weight: 500;
+    margin-top: 20px;
+}
+
+.complaint-form-section input,
+.complaint-form-section select,
+.complaint-form-section textarea {
+    background: #fff;
+    color: #333;
+    border: 1px solid #444;
+}
+
+/* Community Feed (Right Column) */
+.community-feed-section {
+    background: #fff;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+}
+
+.community-feed-section h2 {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    font-size: 2.2rem;
+    color: #2c3e50;
+    border-bottom: none;
+}
+
+.community-feed-section h2 i {
+    color: #3498db;
+}
+
+.community-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+    margin-top: 30px;
+}
+
+/* Individual Community Cards */
+.community-grid .complaint-card {
+    display: block;
+    /* Not compact horizontal */
+    padding: 20px;
+    border: 1px solid #eee;
+    border-top: 4px solid #3498db;
+    border-radius: 12px;
+    background: #fff;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.02);
+}
+
+.community-grid .card-header .card-title {
+    font-size: 1.1rem;
+    font-weight: 700;
+}
+
+.community-grid .card-description {
+    display: block !important;
+    margin: 15px 0;
+    color: #666;
+}
+
+.community-grid .card-category,
+.community-grid .card-location {
+    display: inline-block !important;
+}
+
+/* Comments Section - Matching screenshot */
+.comments-section {
+    margin-top: 20px;
+    padding-top: 15px;
+    border-top: 1px solid #f0f0f0;
+}
+
+.comments-title {
+    font-size: 0.95rem;
+    font-weight: 700;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.comment-input-group {
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.comment-input {
+    width: 100%;
+    margin-bottom: 8px;
+    padding: 10px;
+    border-radius: 8px !important;
+    background: #fdfdfd;
+}
+
+.btn-comment {
+    align-self: flex-start;
+    padding: 4px 12px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    background: #fff;
+    color: #333;
+    font-weight: 600;
+}
+
+.btn-comment:hover {
+    background: #eee;
 }
 
 .card-header {
