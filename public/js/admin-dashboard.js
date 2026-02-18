@@ -4,7 +4,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const links = {
         'gestion-reportes': document.getElementById('gestion-reportes'),
         'gestion-proyectos': document.getElementById('gestion-proyectos'),
-        'gestion-servicios': document.getElementById('gestion-servicios')
+        'gestion-servicios': document.getElementById('gestion-servicios'),
+        'gestion-usuarios': document.getElementById('gestion-usuarios')
     };
     // Función para actualizar el contenido
     const loadContent = (section) => {
@@ -217,48 +218,140 @@ document.addEventListener('DOMContentLoaded', () => {
                 break;
             case 'gestion-usuarios':
                 contentContainer.innerHTML = `
-                    <h2>Gestión de Usuarios</h2>
-                    <p>Control y monitoreo de usuarios.</p>
-                    <div class="user-list">
-                        <div class="card" id="gestionUsuariosControl">
-                            <h3>Actualizar Estado de Usuario</h3>
-                            <select id="tipoUsuario">
-                                <option value="Usuario">Usuario</option>
-                                <option value="Admin">Admin</option>
-                            </select>
-                            <select id="estadoUsuario">
-                                <option value="Activo">Activo</option>
-                                <option value="Inactivo">Inactivo</option>
-                            </select>
-                            <button id="btnGestionarUsuario">Gestionar</button>
-                        </div>
-                        <div id="resultadoGestion" style="margin-top: 20px;"></div>
+                    <div class="main-content-header">
+                        <h2>Usuarios Registrados</h2>
+                        <p>Visualización de todos los usuarios en el sistema.</p>
+                    </div>
+                    <div class="table-container">
+                        <table class="users-table">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Nombre</th>
+                                    <th>Email</th>
+                                    <th>Teléfono</th>
+                                    <th>Rol</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody id="users-table-body">
+                                <tr>
+                                    <td colspan="6" style="text-align: center;">Cargando usuarios...</td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
                 `;
-                document.getElementById('btnGestionarUsuario').addEventListener('click', () => {
-                    const tipo = document.getElementById('tipoUsuario').value;
-                    const estado = document.getElementById('estadoUsuario').value;
-                    const resultadoDiv = document.getElementById('resultadoGestion');
-                    resultadoDiv.innerHTML = `
-                        <div class="card" style="background-color: #e8f6f3; border-left: 4px solid #1abc9c;">
-                            <h3>Estado Actualizado</h3>
-                            <p><strong>Usuario:</strong> ${tipo}</p>
-                            <p><strong>Estado:</strong> ${estado}</p>
-                            <p><em>Cambios registrados con éxito.</em></p>
-                            <button id="btnEliminarUsuario">Eliminar</button>
-                        </div>
-                    `;
-                    document.getElementById('btnEliminarUsuario').addEventListener('click', () => {
-                        const resultadoDiv = document.getElementById('resultadoGestion');
-                        resultadoDiv.innerHTML = '';
-                    });
-                });
+
+                const fetchUsers = async () => {
+                    try {
+                        const response = await fetch('http://localhost:3001/usuarios');
+                        const users = await response.json();
+                        const tableBody = document.getElementById('users-table-body');
+                        tableBody.innerHTML = '';
+
+                        if (users.length === 0) {
+                            tableBody.innerHTML = '<tr><td colspan="6" style="text-align: center;">No hay usuarios registrados.</td></tr>';
+                            return;
+                        }
+
+                        users.forEach(user => {
+                            const name = user.nombre || 'Usuario';
+                            const initials = name.split(' ').map(n => n[0]).join('').toUpperCase().substring(0, 2);
+                            const tr = document.createElement('tr');
+                            tr.innerHTML = `
+                                <td>#${user.id}</td>
+                                <td>
+                                    <div class="user-cell">
+                                        <div class="avatar">${initials}</div>
+                                        <div class="user-info-text">
+                                            <div style="font-weight: 600; color: #0f172a;">${name}</div>
+                                            <div style="font-size: 0.8rem; color: #64748b;">${user.rol || 'Miembro'}</div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>${user.email}</td>
+                                <td>${user.telefono || '---'}</td>
+                                <td>
+                                    <span class="status-badge ${user.rol === 'admin' ? 'status-admin' : 'status-user'}">
+                                        ${user.rol === 'admin' ? 'Administrador' : 'Ciudadano'}
+                                    </span>
+                                </td>
+                                <td>
+                                    <div class="btn-actions-container">
+                                        <button class="btn-icon edit" title="Editar">
+                                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>
+                                        </button>
+                                        <button class="btn-icon delete" data-id="${user.id}" title="Eliminar">
+                                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg>
+                                        </button>
+                                    </div>
+                                </td>
+                            `;
+                            tableBody.appendChild(tr);
+                        });
+
+                        // Add delete listeners
+                        tableBody.querySelectorAll('.btn-icon.delete').forEach(btn => {
+                            btn.addEventListener('click', async () => {
+                                const id = btn.getAttribute('data-id');
+                                if (confirm('¿Seguro que deseas eliminar este usuario?')) {
+                                    try {
+                                        await deleteUsuarios(id, 'usuarios');
+                                        fetchUsers(); // Refresh
+                                        Swal.fire('Eliminado', 'Usuario eliminado correctamente', 'success');
+                                    } catch (error) {
+                                        console.error(error);
+                                        Swal.fire('Error', 'No se pudo eliminar el usuario', 'error');
+                                    }
+                                }
+                            });
+                        });
+
+                    } catch (error) {
+                        console.error('Error fetching users:', error);
+                        document.getElementById('users-table-body').innerHTML =
+                            '<tr><td colspan="6" style="text-align: center; color: red;">Error al cargar usuarios</td></tr>';
+                    }
+                };
+
+                fetchUsers();
                 break;
 
             default:
                 contentContainer.innerHTML = '<p>Seleccione una opción del menú.</p>';
         }
     };
+    // Configuración del botón de Cerrar Sesión
+    const btnLogout = document.getElementById('btnLogout');
+    if (btnLogout) {
+        btnLogout.addEventListener('click', async () => {
+            const result = await Swal.fire({
+                title: '¿Cerrar sesión?',
+                text: "Tendrás que ingresar tus credenciales nuevamente.",
+                icon: 'question',
+                showCancelButton: true,
+                confirmButtonColor: '#e74c3c',
+                cancelButtonColor: '#2c3e50',
+                confirmButtonText: 'Sí, salir',
+                cancelButtonText: 'Cancelar'
+            });
+
+            if (result.isConfirmed) {
+                localStorage.removeItem('currentUser');
+                Swal.fire({
+                    icon: 'success',
+                    title: '¡Hasta luego!',
+                    text: 'Sesión cerrada correctamente.',
+                    timer: 1500,
+                    showConfirmButton: false
+                }).then(() => {
+                    window.location.href = 'login.html';
+                });
+            }
+        });
+    }
+
     // Agregar event listeners
     for (const [key, link] of Object.entries(links)) {
         if (link) {
