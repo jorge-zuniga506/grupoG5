@@ -215,6 +215,46 @@ document.addEventListener('DOMContentLoaded', () => {
                     });
                 });
                 break;
+            case 'gestion-usuarios':
+                contentContainer.innerHTML = `
+                    <h2>Gestión de Usuarios</h2>
+                    <p>Control y monitoreo de usuarios.</p>
+                    <div class="user-list">
+                        <div class="card" id="gestionUsuariosControl">
+                            <h3>Actualizar Estado de Usuario</h3>
+                            <select id="tipoUsuario">
+                                <option value="Usuario">Usuario</option>
+                                <option value="Admin">Admin</option>
+                            </select>
+                            <select id="estadoUsuario">
+                                <option value="Activo">Activo</option>
+                                <option value="Inactivo">Inactivo</option>
+                            </select>
+                            <button id="btnGestionarUsuario">Gestionar</button>
+                        </div>
+                        <div id="resultadoGestion" style="margin-top: 20px;"></div>
+                    </div>
+                `;
+                document.getElementById('btnGestionarUsuario').addEventListener('click', () => {
+                    const tipo = document.getElementById('tipoUsuario').value;
+                    const estado = document.getElementById('estadoUsuario').value;
+                    const resultadoDiv = document.getElementById('resultadoGestion');
+                    resultadoDiv.innerHTML = `
+                        <div class="card" style="background-color: #e8f6f3; border-left: 4px solid #1abc9c;">
+                            <h3>Estado Actualizado</h3>
+                            <p><strong>Usuario:</strong> ${tipo}</p>
+                            <p><strong>Estado:</strong> ${estado}</p>
+                            <p><em>Cambios registrados con éxito.</em></p>
+                            <button id="btnEliminarUsuario">Eliminar</button>
+                        </div>
+                    `;
+                    document.getElementById('btnEliminarUsuario').addEventListener('click', () => {
+                        const resultadoDiv = document.getElementById('resultadoGestion');
+                        resultadoDiv.innerHTML = '';
+                    });
+                });
+                break;
+
             default:
                 contentContainer.innerHTML = '<p>Seleccione una opción del menú.</p>';
         }
