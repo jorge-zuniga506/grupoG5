@@ -22,16 +22,6 @@
       "password": "12345"
     }
   ],
-  "servicios": [
-    {
-      "id": "1771350079829",
-      "title": "calll",
-      "category": "servicio",
-      "description": "calle",
-      "location": "caalle",
-      "date": "17/2/2026",
-      "status": "recibido"
-    }
-  ],
+  "servicios": [],
   "proyectos": []
 }
