@@ -1,7 +1,7 @@
 {
   "usuarios": [
     {
-      "id": "1",
+      "id": 1,
       "nombre": "Admin",
       "email": "correo@gmail.com",
       "password": "1234",
@@ -9,16 +9,9 @@
     },
     {
       "id": "2e79",
-      "nombre": "Ronny Salas",
+      "nombre": "Ronny Salas ",
       "email": "Rsalaspost@gmail.com",
       "telefono": "1111111",
-      "password": "12345"
-    },
-    {
-      "id": "13fd",
-      "nombre": "JORGE",
-      "email": "jzunigafwdcostarica@gmail.com",
-      "telefono": "66272782",
       "password": "12345"
     }
   ],

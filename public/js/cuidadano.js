@@ -1,4 +1,3 @@
-
 // Session Security: Logout on refresh
 if (performance.getEntriesByType("navigation")[0].type === "reload") {
     localStorage.removeItem('currentUser');
@@ -40,7 +39,6 @@ document.addEventListener('DOMContentLoaded', () => {
         const location = document.getElementById('location').value;
 
         const newComplaint = {
-            prueba: "golaa",
             title,
             category,
             description,
