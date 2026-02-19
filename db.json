@@ -1,13 +1,6 @@
 {
   "usuarios": [
     {
-      "id": "2e79",
-      "nombre": "Ronny Salas ",
-      "email": "Rsalaspost@gmail.com",
-      "telefono": "1111111",
-      "password": "12345"
-    },
-    {
       "id": "c02a",
       "nombre": "HOLA ",
       "email": "h@gmail.com",
