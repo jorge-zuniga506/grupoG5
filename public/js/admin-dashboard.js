@@ -380,12 +380,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 contentContainer.innerHTML = `
                 <div class="main-content-header">
                     <h2>Gestión de Salarios Municipales</h2>
-                    <p>Administración y registro de salarios de empleados.</p>
+                    <p>Administración detallada y registro de salarios de empleados.</p>
                 </div>
 
                 <div class="card" style="margin-bottom: 25px;">
                     <h3>Registrar Nuevo Salario</h3>
-                    <form id="form-nuevo-salario" style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 15px;">
+                    <form id="form-nuevo-salario" style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 15px; margin-top: 15px;">
                         <div>
                             <label style="display: block; margin-bottom: 5px;">Nombre Completo:</label>
                             <input type="text" id="salario-nombre" style="width: 100%; padding: 8px; border-radius: 4px; border: 1px solid #ddd;" placeholder="Nombre del empleado" required>
@@ -395,33 +395,52 @@ document.addEventListener('DOMContentLoaded', () => {
                             <input type="email" id="salario-correo" style="width: 100%; padding: 8px; border-radius: 4px; border: 1px solid #ddd;" placeholder="correo@ejemplo.com" required>
                         </div>
                         <div>
-                            <label style="display: block; margin-bottom: 5px;">Rol de Empleado:</label>
-                            <select id="salario-rol" style="width: 100%; padding: 8px; border-radius: 4px; border: 1px solid #ddd;">
-                                <option value="Empleado">Empleado ($1000)</option>
-                                <option value="Secretario">Secretario ($1500)</option>     
-                                <option value="Administrador">Administrador ($2500)</option>
+                            <label style="display: block; margin-bottom: 5px;">Puesto:</label>
+                            <input type="text" id="salario-puesto" style="width: 100%; padding: 8px; border-radius: 4px; border: 1px solid #ddd;" placeholder="Ej: Analista" required>
+                        </div>
+                        <div>
+                            <label style="display: block; margin-bottom: 5px;">Departamento:</label>
+                            <select id="salario-depto" style="width: 100%; padding: 8px; border-radius: 4px; border: 1px solid #ddd;">
+                                <option value="Recursos Humanos">Recursos Humanos</option>
+                                <option value="Tecnología e Información">Tecnología e Información</option>     
+                                <option value="Finanzas">Finanzas</option>
+                                <option value="Operaciones">Operaciones</option>
                             </select>
                         </div>
-                        <div style="display: flex; align-items: flex-end;">
-                            <button type="submit" style="background-color: #2ecc71; width: 100%; margin-top: 0;">Guardar Salario</button>
+                        <div>
+                            <label style="display: block; margin-bottom: 5px;">Salario Base:</label>
+                            <input type="number" id="salario-base" style="width: 100%; padding: 8px; border-radius: 4px; border: 1px solid #ddd;" placeholder="0.00" step="0.01" required>
+                        </div>
+                        <div>
+                            <label style="display: block; margin-bottom: 5px;">Horas Extra:</label>
+                            <input type="number" id="salario-extra" style="width: 100%; padding: 8px; border-radius: 4px; border: 1px solid #ddd;" placeholder="0" step="1" value="0">
+                        </div>
+                        <div>
+                            <label style="display: block; margin-bottom: 5px;">Rebajos/Deducciones:</label>
+                            <input type="number" id="salario-rebajos" style="width: 100%; padding: 8px; border-radius: 4px; border: 1px solid #ddd;" placeholder="0.00" step="0.01" value="0">
+                        </div>
+                        <div style="display: flex; align-items: flex-end; grid-column: span 2;">
+                            <button type="submit" style="background-color: #2ecc71; width: 100%; margin-top: 0; padding: 10px; font-weight: bold;">Guardar y Calcular Salario Neto</button>
                         </div>
                     </form>
                 </div>
 
-                <div class="table-container">
-                    <table class="users-table">
+                <div class="table-container" style="overflow-x: auto;">
+                    <table class="users-table" style="min-width: 900px;">
                         <thead>
                             <tr>
-                                <th>Nombre</th>
-                                <th>Correo</th>
-                                <th>Rol</th>
-                                <th>Salario Base</th>
+                                <th>Empleado</th>
+                                <th>Puesto/Depto</th>
+                                <th>Base</th>
+                                <th>Extras</th>
+                                <th>Rebajos</th>
+                                <th>Neto</th>
                                 <th>Acciones</th>
                             </tr>
                         </thead>
                         <tbody id="tabla-salarios-body">
                             <tr>
-                                <td colspan="5" style="text-align: center;">Cargando registros de salarios...</td>
+                                <td colspan="7" style="text-align: center;">Cargando registros de salarios...</td>
                             </tr>
                         </tbody>
                     </table>
@@ -435,19 +454,25 @@ document.addEventListener('DOMContentLoaded', () => {
                         tableBody.innerHTML = '';
 
                         if (salarios.length === 0) {
-                            tableBody.innerHTML = '<tr><td colspan="5" style="text-align: center;">No hay registros de salarios.</td></tr>';
+                            tableBody.innerHTML = '<tr><td colspan="7" style="text-align: center;">No hay registros de salarios.</td></tr>';
                             return;
                         }
 
                         salarios.forEach(item => {
                             const tr = document.createElement('tr');
                             tr.innerHTML = `
-                                <td>${item.nombre}</td>
-                                <td>${item.correo}</td>
                                 <td>
-                                    <span class="status-badge status-user">${item.rol}</span>
+                                    <div style="font-weight: 600;">${item.nombre}</div>
+                                    <div style="font-size: 0.8rem; color: #64748b;">${item.correo}</div>
                                 </td>
-                                <td><strong>$${item.salario}</strong></td>
+                                <td>
+                                    <div>${item.puesto}</div>
+                                    <div style="font-size: 0.8rem; color: #64748b;">${item.depto}</div>
+                                </td>
+                                <td>$${Number(item.base).toFixed(2)}</td>
+                                <td style="color: #166534;">+$${Number(item.pagoExtra || 0).toFixed(2)}<br><small>(${item.horasExtra}h)</small></td>
+                                <td style="color: #991b1b;">-$${Number(item.rebajos).toFixed(2)}</td>
+                                <td style="font-size: 1.1rem; color: #0f172a;"><strong>$${Number(item.salarioNeto).toFixed(2)}</strong></td>
                                 <td>
                                     <button class="btn-icon delete delete-salary-btn" data-id="${item.id}" title="Eliminar">
                                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
@@ -475,29 +500,40 @@ document.addEventListener('DOMContentLoaded', () => {
                         });
                     } catch (error) {
                         console.error('Error loading salaries:', error);
-                        document.getElementById('tabla-salarios-body').innerHTML = '<tr><td colspan="5" style="text-align: center; color: red;">Error al cargar salarios</td></tr>';
+                        document.getElementById('tabla-salarios-body').innerHTML = '<tr><td colspan="7" style="text-align: center; color: red;">Error al cargar salarios</td></tr>';
                     }
                 };
 
                 document.getElementById('form-nuevo-salario').addEventListener('submit', async (e) => {
                     e.preventDefault();
 
-                    const rol = document.getElementById('salario-rol').value;
-                    let montoSalario = 1000;
-                    if (rol === 'Secretario') montoSalario = 1500;
-                    if (rol === 'Administrador') montoSalario = 2500;
+                    const base = parseFloat(document.getElementById('salario-base').value);
+                    const horasExtra = parseFloat(document.getElementById('salario-extra').value || 0);
+                    const rebajos = parseFloat(document.getElementById('salario-rebajos').value || 0);
+
+                    // Cálculo automático
+                    // Tarifa por hora (asumiendo 160h mensuales)
+                    const tarifaHora = base / 160;
+                    // Horas extra se pagan al 1.5x
+                    const pagoExtra = horasExtra * tarifaHora * 1.5;
+                    const salarioNeto = base + pagoExtra - rebajos;
 
                     const nuevoSalario = {
                         nombre: document.getElementById('salario-nombre').value,
                         correo: document.getElementById('salario-correo').value,
-                        rol: rol,
-                        salario: montoSalario,
+                        puesto: document.getElementById('salario-puesto').value,
+                        depto: document.getElementById('salario-depto').value,
+                        base: base,
+                        horasExtra: horasExtra,
+                        pagoExtra: pagoExtra,
+                        rebajos: rebajos,
+                        salarioNeto: salarioNeto,
                         id: Date.now().toString()
                     };
 
                     try {
                         await postData('salarios', nuevoSalario);
-                        Swal.fire('Guardado', 'Registro de salario guardado', 'success');
+                        Swal.fire('Guardado', 'Cálculo de salario neto realizado correctamente', 'success');
                         e.target.reset();
                         loadSalarios();
                     } catch (error) {

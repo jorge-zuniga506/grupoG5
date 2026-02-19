@@ -20,5 +20,18 @@
   ],
   "servicios": [],
   "proyectos": [],
-  "salarios": []
+  "salarios": [
+    {
+      "id": "1771528861709",
+      "nombre": "Jorge Zuñiga",
+      "correo": "jzunigafwdcostarica@gmail.com",
+      "puesto": "ADMIN PRO ",
+      "depto": "Tecnología e Información",
+      "base": 100000,
+      "horasExtra": 90,
+      "pagoExtra": 84375,
+      "rebajos": 20000,
+      "salarioNeto": 164375
+    }
+  ]
 }
