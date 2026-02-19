@@ -6,7 +6,8 @@ document.addEventListener('DOMContentLoaded', () => {
         'gestion-reportes': document.getElementById('gestion-reportes'),
         'gestion-proyectos': document.getElementById('gestion-proyectos'),
         'gestion-servicios': document.getElementById('gestion-servicios'),
-        'gestion-usuarios': document.getElementById('gestion-usuarios')
+        'gestion-usuarios': document.getElementById('gestion-usuarios'),
+        'gestion-salarios': document.getElementById('gestion-salarios')
     };
 
     // Función para actualizar el contenido
@@ -358,7 +359,8 @@ document.addEventListener('DOMContentLoaded', () => {
                         nombre: document.getElementById('user-nombre').value,
                         email: document.getElementById('user-email').value,
                         rol: document.getElementById('user-rol').value,
-                        activo: true
+                        activo: true,
+                        id: Date.now().toString()
                     };
                     try {
                         await postData('usuarios', newUser);
@@ -373,43 +375,139 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 fetchUsers();
                 break;
-                //Desde Aquí
+
             case 'gestion-salarios':
                 contentContainer.innerHTML = `
-                <div>
-                    <h1> Gestion de Salarios </h1>
-                    <h2> Crear nuevo registro </h2>
+                <div class="main-content-header">
+                    <h2>Gestión de Salarios Municipales</h2>
+                    <p>Administración y registro de salarios de empleados.</p>
                 </div>
-                <div> 
-                    <form id="form-nuevo-salario">
-                        <input type="text" id="nombre" placeholder="Nombre" required>
-                        <input type="email" id="correo" placeholder="Correo" required>
-                        <select id="rol">
-                            <option value="Empleado">Empleado</option>
-                            <option value="Administrador">Administrador</option>
-                            <option value="Secretario">Secretario</option>     
-                        </select>
-                        <button type="submit">Crear Salario</button>
+
+                <div class="card" style="margin-bottom: 25px;">
+                    <h3>Registrar Nuevo Salario</h3>
+                    <form id="form-nuevo-salario" style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 15px;">
+                        <div>
+                            <label style="display: block; margin-bottom: 5px;">Nombre Completo:</label>
+                            <input type="text" id="salario-nombre" style="width: 100%; padding: 8px; border-radius: 4px; border: 1px solid #ddd;" placeholder="Nombre del empleado" required>
+                        </div>
+                        <div>
+                            <label style="display: block; margin-bottom: 5px;">Correo Electrónico:</label>
+                            <input type="email" id="salario-correo" style="width: 100%; padding: 8px; border-radius: 4px; border: 1px solid #ddd;" placeholder="correo@ejemplo.com" required>
+                        </div>
+                        <div>
+                            <label style="display: block; margin-bottom: 5px;">Rol de Empleado:</label>
+                            <select id="salario-rol" style="width: 100%; padding: 8px; border-radius: 4px; border: 1px solid #ddd;">
+                                <option value="Empleado">Empleado ($1000)</option>
+                                <option value="Secretario">Secretario ($1500)</option>     
+                                <option value="Administrador">Administrador ($2500)</option>
+                            </select>
+                        </div>
+                        <div style="display: flex; align-items: flex-end;">
+                            <button type="submit" style="background-color: #2ecc71; width: 100%; margin-top: 0;">Guardar Salario</button>
+                        </div>
                     </form>
                 </div>
-                <div>
-                    <table>
+
+                <div class="table-container">
+                    <table class="users-table">
                         <thead>
                             <tr>
                                 <th>Nombre</th>
                                 <th>Correo</th>
                                 <th>Rol</th>
-                                <th>Salario</th>
+                                <th>Salario Base</th>
                                 <th>Acciones</th>
                             </tr>
                         </thead>
-                        <tbody id="tabla-salarios"></tbody>
+                        <tbody id="tabla-salarios-body">
+                            <tr>
+                                <td colspan="5" style="text-align: center;">Cargando registros de salarios...</td>
+                            </tr>
+                        </tbody>
                     </table>
                 </div> 
                 `;
-                fetchSalarios();
+
+                const loadSalarios = async () => {
+                    try {
+                        const salarios = await getAllData('salarios');
+                        const tableBody = document.getElementById('tabla-salarios-body');
+                        tableBody.innerHTML = '';
+
+                        if (salarios.length === 0) {
+                            tableBody.innerHTML = '<tr><td colspan="5" style="text-align: center;">No hay registros de salarios.</td></tr>';
+                            return;
+                        }
+
+                        salarios.forEach(item => {
+                            const tr = document.createElement('tr');
+                            tr.innerHTML = `
+                                <td>${item.nombre}</td>
+                                <td>${item.correo}</td>
+                                <td>
+                                    <span class="status-badge status-user">${item.rol}</span>
+                                </td>
+                                <td><strong>$${item.salario}</strong></td>
+                                <td>
+                                    <button class="btn-icon delete delete-salary-btn" data-id="${item.id}" title="Eliminar">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
+                                    </button>
+                                </td>
+                            `;
+
+                            tr.querySelector('.delete-salary-btn').addEventListener('click', async (e) => {
+                                const id = item.id;
+                                const result = await Swal.fire({
+                                    title: '¿Eliminar registro?',
+                                    text: "Se borrará la información salarial del empleado.",
+                                    icon: 'warning',
+                                    showCancelButton: true,
+                                    confirmButtonColor: '#e74c3c'
+                                });
+                                if (result.isConfirmed) {
+                                    await deleteData('salarios', id);
+                                    Swal.fire('Eliminado', 'Registro eliminado correctamente', 'success');
+                                    loadSalarios();
+                                }
+                            });
+
+                            tableBody.appendChild(tr);
+                        });
+                    } catch (error) {
+                        console.error('Error loading salaries:', error);
+                        document.getElementById('tabla-salarios-body').innerHTML = '<tr><td colspan="5" style="text-align: center; color: red;">Error al cargar salarios</td></tr>';
+                    }
+                };
+
+                document.getElementById('form-nuevo-salario').addEventListener('submit', async (e) => {
+                    e.preventDefault();
+
+                    const rol = document.getElementById('salario-rol').value;
+                    let montoSalario = 1000;
+                    if (rol === 'Secretario') montoSalario = 1500;
+                    if (rol === 'Administrador') montoSalario = 2500;
+
+                    const nuevoSalario = {
+                        nombre: document.getElementById('salario-nombre').value,
+                        correo: document.getElementById('salario-correo').value,
+                        rol: rol,
+                        salario: montoSalario,
+                        id: Date.now().toString()
+                    };
+
+                    try {
+                        await postData('salarios', nuevoSalario);
+                        Swal.fire('Guardado', 'Registro de salario guardado', 'success');
+                        e.target.reset();
+                        loadSalarios();
+                    } catch (error) {
+                        console.error('Error saving salary:', error);
+                        Swal.fire('Error', 'No se pudo guardar el registro', 'error');
+                    }
+                });
+
+                loadSalarios();
                 break;
-                //Hasta aquí
 
             default:
                 contentContainer.innerHTML = '<p>Seleccione una opción del menú.</p>';
