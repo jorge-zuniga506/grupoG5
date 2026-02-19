@@ -373,6 +373,41 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 fetchUsers();
                 break;
+            case 'gestion-salarios':
+                contentContainer.innerHTML = `
+                <div>
+                    <h1> Gestion de Salarios </h1>
+                    <h2> Crear nuevo registro </h2>
+                </div>
+                <div> 
+                    <form id="form-nuevo-salario">
+                        <input type="text" id="nombre" placeholder="Nombre" required>
+                        <input type="email" id="correo" placeholder="Correo" required>
+                        <select id="rol">
+                            <option value="Empleado">Empleado</option>
+                            <option value="Administrador">Administrador</option>
+                            <option value="Secretario">Secretario</option>     
+                        </select>
+                        <button type="submit">Crear Salario</button>
+                    </form>
+                </div>
+                <div>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Nombre</th>
+                                <th>Correo</th>
+                                <th>Rol</th>
+                                <th>Salario</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tabla-salarios"></tbody>
+                    </table>
+                </div> 
+                `;
+                fetchSalarios();
+                break;    
 
             default:
                 contentContainer.innerHTML = '<p>Seleccione una opción del menú.</p>';
