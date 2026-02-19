@@ -22,16 +22,28 @@
   "proyectos": [],
   "salarios": [
     {
-      "id": "1771528861709",
+      "id": "1771531325456",
       "nombre": "Jorge Zuñiga",
       "correo": "jzunigafwdcostarica@gmail.com",
       "puesto": "ADMIN PRO ",
       "depto": "Tecnología e Información",
-      "base": 100000,
-      "horasExtra": 90,
-      "pagoExtra": 84375,
-      "rebajos": 20000,
-      "salarioNeto": 164375
+      "base": 900,
+      "horasExtra": 23,
+      "pagoExtra": 194.0625,
+      "rebajos": 200,
+      "salarioNeto": 894.0625
+    }
+  ],
+  "financiamiento": [
+    {
+      "id": "1771531405642",
+      "nombre": "Calle",
+      "descripcion": "arrglar la calle",
+      "entidad": "bcr",
+      "montoSolicitado": 200,
+      "montoAprobado": 1000,
+      "fecha": "2026-02-19",
+      "estado": "Aprobado"
     }
   ]
 }

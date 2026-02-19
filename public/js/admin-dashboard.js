@@ -7,7 +7,8 @@ document.addEventListener('DOMContentLoaded', () => {
         'gestion-proyectos': document.getElementById('gestion-proyectos'),
         'gestion-servicios': document.getElementById('gestion-servicios'),
         'gestion-usuarios': document.getElementById('gestion-usuarios'),
-        'gestion-salarios': document.getElementById('gestion-salarios')
+        'gestion-salarios': document.getElementById('gestion-salarios'),
+        'gestion-financiamiento': document.getElementById('gestion-financiamiento')
     };
 
     // Función para actualizar el contenido
@@ -543,6 +544,206 @@ document.addEventListener('DOMContentLoaded', () => {
                 });
 
                 loadSalarios();
+                break;
+            case 'gestion-financiamiento':
+                contentContainer.innerHTML = `
+                <div class="main-content-header">
+                    <h2>Gestión de Solicitudes de Financiamiento</h2>
+                    <p>Cree solicitudes, monitoree estados y gestione fondos para proyectos municipales.</p>
+                </div>
+
+                <div class="card" style="margin-bottom: 25px;">
+                    <h3>Nueva Solicitud de Financiamiento</h3>
+                    <form id="form-nuevo-financiamiento" style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 15px; margin-top: 15px;">
+                        <div style="grid-column: span 2;">
+                            <label style="display: block; margin-bottom: 5px;">Nombre del Proyecto:</label>
+                            <input type="text" id="fin-nombre" style="width: 100%; padding: 8px; border-radius: 4px; border: 1px solid #ddd;" placeholder="Ej: Modernización Parque Escazú" required>
+                        </div>
+                        <div>
+                            <label style="display: block; margin-bottom: 5px;">Entidad Financiera:</label>
+                            <input type="text" id="fin-entidad" style="width: 100%; padding: 8px; border-radius: 4px; border: 1px solid #ddd;" placeholder="Ej: Banco Nacional" required>
+                        </div>
+                        <div style="grid-column: span 3;">
+                            <label style="display: block; margin-bottom: 5px;">Descripción del Proyecto:</label>
+                            <textarea id="fin-descripcion" style="width: 100%; padding: 8px; border-radius: 4px; border: 1px solid #ddd; min-height: 80px;" placeholder="Detalles de la necesidad de financiamiento..." required></textarea>
+                        </div>
+                        <div>
+                            <label style="display: block; margin-bottom: 5px;">Monto Solicitado ($):</label>
+                            <input type="number" id="fin-monto-solicitado" style="width: 100%; padding: 8px; border-radius: 4px; border: 1px solid #ddd;" placeholder="0.00" step="0.01" required>
+                        </div>
+                        <div>
+                            <label style="display: block; margin-bottom: 5px;">Fecha de Solicitud:</label>
+                            <input type="date" id="fin-fecha" style="width: 100%; padding: 8px; border-radius: 4px; border: 1px solid #ddd;" required>
+                        </div>
+                        <div style="display: flex; align-items: flex-end;">
+                            <button type="submit" style="background-color: #3498db; color: white; width: 100%; margin-top: 0; padding: 10px; font-weight: bold; border: none; border-radius: 4px; cursor: pointer;">Crear Solicitud</button>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="table-container" style="overflow-x: auto;">
+                    <table class="users-table" style="min-width: 1000px;">
+                        <thead>
+                            <tr>
+                                <th>Proyecto / Descripción</th>
+                                <th>Entidad</th>
+                                <th>Monto Solicitado</th>
+                                <th>Monto Aprobado</th>
+                                <th>Fecha</th>
+                                <th>Estado</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tabla-financiamiento-body">
+                            <tr>
+                                <td colspan="7" style="text-align: center;">Cargando solicitudes...</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div> 
+                `;
+
+                const loadFinanciamiento = async () => {
+                    try {
+                        const solicitudes = await getAllData('financiamiento');
+                        const tableBody = document.getElementById('tabla-financiamiento-body');
+                        tableBody.innerHTML = '';
+
+                        if (solicitudes.length === 0) {
+                            tableBody.innerHTML = '<tr><td colspan="7" style="text-align: center;">No hay solicitudes de financiamiento registradas.</td></tr>';
+                            return;
+                        }
+
+                        solicitudes.forEach(item => {
+                            const tr = document.createElement('tr');
+
+                            let statusColor = '#64748b'; // Pendiente
+                            if (item.estado === 'Aprobado') statusColor = '#166534';
+                            if (item.estado === 'Rechazado') statusColor = '#991b1b';
+
+                            const statusBadgeStyle = `
+                                padding: 4px 8px; 
+                                border-radius: 12px; 
+                                font-size: 0.75rem; 
+                                font-weight: 600;
+                                background-color: ${statusColor}15;
+                                color: ${statusColor};
+                                border: 1px solid ${statusColor}30;
+                            `;
+
+                            tr.innerHTML = `
+                                <td>
+                                    <div style="font-weight: 600;">${item.nombre}</div>
+                                    <div style="font-size: 0.8rem; color: #64748b; max-width: 250px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;" title="${item.descripcion}">${item.descripcion}</div>
+                                </td>
+                                <td>${item.entidad}</td>
+                                <td>$${Number(item.montoSolicitado).toLocaleString()}</td>
+                                <td style="font-weight: bold; color: ${item.montoAprobado > 0 ? '#166534' : '#64748b'}">
+                                    $${Number(item.montoAprobado || 0).toLocaleString()}
+                                </td>
+                                <td>${item.fecha}</td>
+                                <td>
+                                    <span style="${statusBadgeStyle}">${item.estado || 'Pendiente'}</span>
+                                </td>
+                                <td>
+                                    <div style="display: flex; gap: 5px;">
+                                        <button class="btn-icon status-approve-btn" data-id="${item.id}" title="Aprobar" style="color: #166534;">
+                                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                        </button>
+                                        <button class="btn-icon status-reject-btn" data-id="${item.id}" title="Rechazar" style="color: #991b1b;">
+                                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                                        </button>
+                                        <button class="btn-icon delete delete-fin-btn" data-id="${item.id}" title="Eliminar">
+                                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
+                                        </button>
+                                    </div>
+                                </td>
+                            `;
+
+                            // Event Listeners for actions
+                            tr.querySelector('.status-approve-btn').addEventListener('click', async () => {
+                                const { value: monto } = await Swal.fire({
+                                    title: 'Aprobar Financiamiento',
+                                    input: 'number',
+                                    inputLabel: 'Monto a aprobar ($)',
+                                    inputValue: item.montoSolicitado,
+                                    showCancelButton: true,
+                                    confirmButtonColor: '#28a745'
+                                });
+
+                                if (monto) {
+                                    await patchData('financiamiento', item.id, {
+                                        estado: 'Aprobado',
+                                        montoAprobado: parseFloat(monto)
+                                    });
+                                    Swal.fire('¡Aprobado!', 'La solicitud ha sido aprobada.', 'success');
+                                    loadFinanciamiento();
+                                }
+                            });
+
+                            tr.querySelector('.status-reject-btn').addEventListener('click', async () => {
+                                const result = await Swal.fire({
+                                    title: '¿Rechazar solicitud?',
+                                    text: "El estado cambiará a Rechazado.",
+                                    icon: 'warning',
+                                    showCancelButton: true,
+                                    confirmButtonColor: '#e74c3c'
+                                });
+                                if (result.isConfirmed) {
+                                    await patchData('financiamiento', item.id, { estado: 'Rechazado', montoAprobado: 0 });
+                                    Swal.fire('Rechazado', 'La solicitud ha sido rechazada.', 'success');
+                                    loadFinanciamiento();
+                                }
+                            });
+
+                            tr.querySelector('.delete-fin-btn').addEventListener('click', async () => {
+                                const result = await Swal.fire({
+                                    title: '¿Eliminar registro?',
+                                    text: "Esta acción no se puede deshacer.",
+                                    icon: 'warning',
+                                    showCancelButton: true,
+                                    confirmButtonColor: '#e74c3c'
+                                });
+                                if (result.isConfirmed) {
+                                    await deleteData('financiamiento', item.id);
+                                    Swal.fire('Eliminado', 'Registro eliminado correctamente', 'success');
+                                    loadFinanciamiento();
+                                }
+                            });
+
+                            tableBody.appendChild(tr);
+                        });
+                    } catch (error) {
+                        console.error('Error loading financing:', error);
+                        document.getElementById('tabla-financiamiento-body').innerHTML = '<tr><td colspan="7" style="text-align: center; color: red;">Error al cargar datos</td></tr>';
+                    }
+                };
+
+                document.getElementById('form-nuevo-financiamiento').addEventListener('submit', async (e) => {
+                    e.preventDefault();
+                    const nuevo = {
+                        nombre: document.getElementById('fin-nombre').value,
+                        descripcion: document.getElementById('fin-descripcion').value,
+                        entidad: document.getElementById('fin-entidad').value,
+                        montoSolicitado: parseFloat(document.getElementById('fin-monto-solicitado').value),
+                        montoAprobado: 0,
+                        fecha: document.getElementById('fin-fecha').value,
+                        estado: 'Pendiente',
+                        id: Date.now().toString()
+                    };
+
+                    try {
+                        await postData('financiamiento', nuevo);
+                        Swal.fire('Solicitud Creada', 'La solicitud se ha registrado con estado Pendiente.', 'success');
+                        e.target.reset();
+                        loadFinanciamiento();
+                    } catch (error) {
+                        console.error('Error saving financing:', error);
+                        Swal.fire('Error', 'No se pudo crear la solicitud.', 'error');
+                    }
+                });
+
+                loadFinanciamiento();
                 break;
 
             default:
