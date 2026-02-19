@@ -373,6 +373,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 fetchUsers();
                 break;
+                //Desde Aquí
             case 'gestion-salarios':
                 contentContainer.innerHTML = `
                 <div>
@@ -407,7 +408,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 </div> 
                 `;
                 fetchSalarios();
-                break;    
+                break;
+                //Hasta aquí
 
             default:
                 contentContainer.innerHTML = '<p>Seleccione una opción del menú.</p>';
