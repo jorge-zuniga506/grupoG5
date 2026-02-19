@@ -15,7 +15,14 @@
       "email": "h@gmail.com",
       "telefono": "12345678",
       "password": "1234",
-      "rol": "admin"
+      "rol": "Administrador"
+    },
+    {
+      "id": "5679",
+      "nombre": "maria",
+      "email": "m@gmaiil.com",
+      "rol": "Administrador",
+      "activo": true
     }
   ],
   "servicios": [],
