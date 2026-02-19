@@ -5,7 +5,9 @@
       "nombre": "Ronny Salas ",
       "email": "Rsalaspost@gmail.com",
       "telefono": "1111111",
-      "password": "12345"
+      "password": "12345",
+      "rol": "Ciudadano",
+      "activo": true
     },
     {
       "id": "c02a",

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>			<meta charset="UTF-8">			
+<title>CRUD Usuarios Municipalidad</title>	
+<link rel="stylesheet" href="../styles/crud.css">
+</head>
+
+<body>
+
+	<h1>Administración de Usuarios</h1>
+
+	<form id="formUsuario">
+
+<input type="text" id="nombre" placeholder="Nombre" required>
+
+<input type="email" id="correo" placeholder="Correo" required>
+
+	<select id="rol">
+					<option value="Usuario">Usuario</option>
+					<option value="Administrador">Administrador</option>
+				</select>
+
+				<button type="submit">Crear Usuario</button>
+
+			</form>
+
+			<table>
+
+			<thead>
+
+				<tr>
+					<th>ID</th>
+					<th>Nombre</th>
+						<th>Correo</th>
+						<th>Rol</th>
+						<th>Estado</th>
+						<th>Acciones</th>
+					</tr>
+
+			</thead>
+
+			<tbody id="tablaUsuarios"></tbody>
+
+		</table>
+
+</body>
+
+</html>
